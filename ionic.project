@@ -1,0 +1,10 @@
+{
+  "name": "v0.3-LibertyDayApp",
+  "app_id": "d49a3e56",
+  "proxies": [
+    {
+      "path": "/packet/ldi_app",
+      "proxyUrl": "http://libertyday.org/packet/ldi_app"
+    }
+  ]
+}

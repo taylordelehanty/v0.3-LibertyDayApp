@@ -1,0 +1,9 @@
+<ion-view view-title="Decks">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="title in titles" ng-click="sendTitle(title)" href="#/app/decks/{{title}}">
+        {{title}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

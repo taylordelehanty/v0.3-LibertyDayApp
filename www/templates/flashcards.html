@@ -1,0 +1,27 @@
+<ion-view view-title="{{title}}">
+    <ion-content>
+        <div class="icons">
+            <!--<div class="text-right">
+                <button class="button button-icon icon ion-ios-shuffle-strong" side="right" ng-click="shuffled()"></button>
+            </div>
+            <div class="text-left" ng-repeat="card in flashcards track by $index">
+                {{$index}}
+            </div>-->
+        </div>
+        <ion-slide-box
+            delegate-handle = "flashcard"
+            show-pager="false"
+            active-slide="currentIndex"
+            on-slide-changed="slideHasChanged(currentIndex)"
+            does-continue="false">
+            <ion-slide ng-repeat="card in flashcards">
+                <div class="container">
+                    <div class="flashcard item-text-wrap" ng-class="{flipped:isFlipped}" ng-click="isFlipped=!isFlipped">
+                        <div class="front face">{{card.f}}</div>
+                        <div class="back face">{{card.b}}</div>
+                    </div>
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+    </ion-content>
+</ion-view>
