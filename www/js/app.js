@@ -80,6 +80,16 @@ angular.module('starter', ['ionic', 'starter.controllers']) //
       }
   })
   
+  .state('app.quiz', {
+      url: '/quiz',
+      views: {
+          'menuContent': {
+              templateUrl: 'templates/quiz.html',
+              controller: 'QuizCtrl'
+          }
+      }
+  })
+  
   .state('app.about', {
       url: '/about',
       views: {
