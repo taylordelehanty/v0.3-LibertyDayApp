@@ -147,4 +147,32 @@ angular.module('starter.controllers', [])
     
 })
 
+.controller('QuizCtrl', function($scope, Shuffle) {
+    $scope.questions = [
+        {id: "1", q:"What are the first three words of the U.S. Constitution?", a: "We the People", c: ["We the Government", "We the States", "We the Congress"]},
+        {id: "2", q:"The first three articles of the U.S. Constitution describe the three branches of the U.S. government. What are they?", a: "Judicial, Legislative, Executive", c: ["Legislative, Executive, Artificial", "President, Congress, High Court", "Executive, Congress, Legislative"]},
+        {id: "3", q:"The Congress of the United States is divided into two sections: What are they?", a: "Senate, House of Representatives", c: ["House of Commons, Parliament", "House of Commons, Senate", "Congress, Senate"]}
+    ];
+    
+    
+    for (var i = 0; i < $scope.questions.length; i++) {
+        var question = $scope.questions[i];
+        question.viewAnswers = [{a:question.a, right:true}];
+        for (var j = 0; j < question.c.length; j++) {
+            question.viewAnswers.push({a:question.c[j], right:false});
+            
+        }
+        question.viewAnswers = Shuffle.shuffleArray(question.viewAnswers);
+    }
+    
+    $scope.submitAnswers = function() {
+        console.log("Answers submitted");
+        console.log($scope.questions);
+        for (var i = 0; i < $scope.questions.length; i++) {
+            var question = $scope.questions[i];
+            console.log(question.viewAnswers[question.currentChoice].right);
+        }
+    }
+})
+
 ;
