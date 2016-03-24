@@ -4,6 +4,11 @@
     opacity: 0.7;
 }
 
+.headerText {
+    text-align: center;
+    padding: 5%;
+}
+
 .container {
       width: 360px;
       height: 480px;

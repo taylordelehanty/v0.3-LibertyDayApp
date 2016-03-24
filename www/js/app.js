@@ -133,37 +133,49 @@ angular.module('starter', ['ionic', 'starter.controllers']) //
     }
 })
 
-.service('ModalDispatch', function() {
-    return {
-        evaluateModal: function($scope, $ionicModal, modalIndex) {
-            switch (modalIndex) {
-                case modalIndex == 0:
-                    $ionicModal.fromTemplateUrl('templates/login.html', {
-                        scope: $scope
-                    }).then(function(modal) {
-                        $scope.modal = modal;
-                    });
-                    break;
-                case modalIndex == 1:
-                    $ionicModal.fromTemplateUrl('templates/results.html', {
-                        scope: $scope
-                    }).then(function(modal) {
-                        $scope.modal = modal;
-                    });
-                    break;
-            }
-        }
-    }
-})
+// .service('ModalDispatch', function() {
+//     return {
+//         evaluateModal: function($scope, $ionicModal, modalIndex) {
+//             switch (modalIndex) {
+//                 case modalIndex == 0:
+//                     $ionicModal.fromTemplateUrl('templates/login.html', {
+//                         scope: $scope
+//                     }).then(function(modal) {
+//                         $scope.modal = modal;
+//                     });
+//                     break;
+//                 case modalIndex == 1:
+//                     $ionicModal.fromTemplateUrl('templates/results.html', {
+//                         scope: $scope
+//                     }).then(function(modal) {
+//                         $scope.modal = modal;
+//                     });
+//                     break;
+//             }
+//         }
+//     }
+// })
 
-.service('ModalIndices', function() {
+// .service('ModalIndices', function() {
+//     return {
+//         index: 0,
+//         getCurrentIndex: function() {
+//             return this.index;
+//         },
+//         setIndex: function(newIndex) {
+//             this.index = newIndex;
+//         }
+//     }
+// })
+
+.service('EvaluateQuiz', function(){
     return {
-        index: 0,
-        getCurrentIndex: function() {
-            return this.index;
+        results: [],
+        getQuizResults: function() {
+            return this.results;
         },
-        setIndex: function(newIndex) {
-            this.index = newIndex;
+        updateQuizResults: function(results) {            
+            this.results = results;
         }
     }
 })

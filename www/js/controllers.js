@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, ModalDispatch, ModalIndices) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, EvaluateQuiz) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -9,53 +9,40 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  // Form data for the login modal
-  $scope.loginData = {};
+//   // Form data for the login modal
+//   $scope.loginData = {};
 
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  ModalDispatch.evaluateModal($scope, $ionicModal, ModalIndices.getCurrentIndex());
-
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-  
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
-
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
-  
-    // Creates the results modal we use after the questions webpage
-//   $ionicModal.fromTemplateUrl('templates/results.html', {
-//       scope: $scope
+//   // Create the login modal that we will use later
+//   $ionicModal.fromTemplateUrl('templates/login.html', {
+//     scope: $scope
 //   }).then(function(modal) {
-//       $scope.modal = modal;
+//     $scope.modal = modal;
 //   });
+
+//   ModalDispatch.evaluateModal($scope, $ionicModal, ModalIndices.getCurrentIndex());
+
+//   // Triggered in the login modal to close it
+//   $scope.closeLogin = function() {
+//     $scope.modal.hide();
+//   };
   
-  $scope.closeResults = function() {
-      $scope.modal.hide();
-  };
+//   // Open the login modal
+//   $scope.login = function() {
+//     $scope.modal.show();
+//   };
+
+//   // Perform the login action when the user submits the login form
+//   $scope.doLogin = function() {
+//     console.log('Doing login', $scope.loginData);
+
+//     // Simulate a login delay. Remove this and replace with your login
+//     // code if using a login system
+//     $timeout(function() {
+//       $scope.closeLogin();
+//     }, 1000);
+//   };
+
   
-  $scope.getResults = function() {
-    $scope.modal.show();
-  };
 })
 
 .controller('DecksCtrl', function($scope, $http, $state, deckTitle, Subjects) {
@@ -106,7 +93,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('QuestCtrl', function($scope, Subjects) {
-    $scope.blank = "_______"
     $scope.subjects = Subjects.getTitles();
     
 })
@@ -117,7 +103,6 @@ angular.module('starter.controllers', [])
         {id: "2", q:"The first three articles of the U.S. Constitution describe the three branches of the U.S. government. What are they?", a: "Judicial, Legislative, Executive", c: ["Legislative, Executive, Artificial", "President, Congress, High Court", "Executive, Congress, Legislative"]},
         {id: "3", q:"The Congress of the United States is divided into two sections: What are they?", a: "Senate, House of Representatives", c: ["House of Commons, Parliament", "House of Commons, Senate", "Congress, Senate"]}
     ];
-    
     
     for (var i = 0; i < $scope.questions.length; i++) {
         var question = $scope.questions[i];
@@ -147,7 +132,7 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('QuizCtrl', function($scope, Shuffle) {
+.controller('QuizCtrl', function($scope, Shuffle, $ionicModal, EvaluateQuiz) {
     $scope.questions = [
         {id: "1", q:"What are the first three words of the U.S. Constitution?", a: "We the People", c: ["We the Government", "We the States", "We the Congress"]},
         {id: "2", q:"The first three articles of the U.S. Constitution describe the three branches of the U.S. government. What are they?", a: "Judicial, Legislative, Executive", c: ["Legislative, Executive, Artificial", "President, Congress, High Court", "Executive, Congress, Legislative"]},
@@ -166,13 +151,35 @@ angular.module('starter.controllers', [])
     }
     
     $scope.submitAnswers = function() {
+        var correct = 0;
         console.log("Answers submitted");
         console.log($scope.questions);
         for (var i = 0; i < $scope.questions.length; i++) {
             var question = $scope.questions[i];
             console.log(question.viewAnswers[question.currentChoice].right);
+            if (question.viewAnswers[question.currentChoice].right == true) {
+                correct++;
+            }
         }
+        $scope.correct = correct;
     }
+  
+    //Creates the results modal we use after the questions webpage
+    $ionicModal.fromTemplateUrl('templates/results.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modal = modal;
+    });
+    
+    $scope.closeResults = function() {
+        $scope.modal.hide();
+    };
+    
+    $scope.getResults = function() {
+        console.log("Results", EvaluateQuiz.getQuizResults());
+        $scope.quizResults = EvaluateQuiz.getQuizResults();
+        $scope.modal.show();
+    };
 })
 
 ;
