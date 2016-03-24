@@ -5,6 +5,9 @@
 }
 
 .headerText {
+    /*Looked up typography and got this CSS template from this website:
+    http://3.7designs.co/blog/2008/06/10-examples-of-beautiful-css-typography-and-how-they-did-it/
+    */
     font-family: Georgia, "Times New Roman", Times, serif;
     font-size:24px;
 	margin-top: 5px; margin-bottom: 0px;
