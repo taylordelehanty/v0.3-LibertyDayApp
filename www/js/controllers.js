@@ -51,7 +51,7 @@ angular.module('starter.controllers', [])
             deckTitle.updateTitle(title);
         }
     if (LiveAPI) {
-        $http.get("http://libertyday.org/packet/ldi_app/titles")
+        //Where your http call goes to your data
             .success(function(data) {
                 $scope.titles = data;
             })
